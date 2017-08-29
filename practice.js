@@ -2,15 +2,18 @@
   // 1) What is the purpose of the 'this keyword'?
 
       //Answer
+          /*to refer to an object from within the object.*/
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
       //Answer
+           //Implicit binding: binds an object to this within the object this will refer to.
 
   // 3) What does .bind do?
 
       //Answer
-
+         //this is called on a function [Function.prototype.bind].  It returns a function like the original but with its this value set to the
+         //argument of bind()
 
 //Next Problem
 
@@ -21,16 +24,29 @@
 
     //Code Here
 
+  var user = {
+    username: "hi",
+    email: "me@me.me",
+    getUsername: function() {
+      return this.username;
+    }
+  }
+
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
 
-
+user.getUsername();
 //Next Problem
 
 
 // Write a constructor function, including method definitions, which will make the following function invocations function properly.
 
   //Function Invocations Here
-
+function Car(make, model, year){
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.moveCar = ()=> this.move += 10;
+}
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
 
@@ -54,7 +70,7 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
-
+getPriusYear = getYear.bind(prius);
 
 
 //New Problem
@@ -69,16 +85,18 @@ var getMyUsername = function() {
  return this.username;
 };
 
-var userName = getMyUsername(); //Fix this
+
+
+var userName = getMyUsername.call(myUser); //Fix this
 
 //Above you're given an object, and  a function. What will the getMyUsername function return?
 //Note(no tests)
   //Answer Here
+  //undefined
 
 //In the example above, what is the 'this keyword' bound to when getMyUsername runs?
 
   //Answer Here
-
+  //to the global object
 
 //Fix the getMyUsername invocation (stored in the userName variable, at the bottom of the above code) so that userName will be equal to 'iliketurtles'.
-
